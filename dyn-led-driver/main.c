@@ -31,18 +31,18 @@ void init(void) {
 void spi_init(void) {
 	// GPIO Ports initialisieren
 	/*
-	 * PIN PORT INTERFACE USAGE
-	 *  47 PD00 SPI0MOSI  Dig.Pot.
- 	 *  48 PD01 SPI0MISO  Dig.Pot.
+	 * PIN PORT INTERFACE USAGE    MODE
+	 *  47 PD00 SPI0MOSI  Dig.Pot. A
+ 	 *  48 PD01 SPI0MISO  Dig.Pot. A
+	 *  49 PD02 SPI0SCK   Dig.Pot. A
+	 *  50 PD03 SPI0CS    Dig.Pot. A
 	 */
 	
-	 
-	// Interne Register initialisieren 
+	// SPI 0
 }
 
 // CANIF0/1 Schnittstelle initialisieren
 void can_init(void) {
-	// GPIO Ports initialisieren
 	/*
 	 * PIN PORT INTERFACE USAGE MODE
 	 *  39 PC15 CANIFRX1  LMM   D
@@ -51,13 +51,26 @@ void can_init(void) {
 	 *  46 PC22 CANIFTX0  UCD   B
 	 */
 	
-	// GPIO Pins aktiviren
+	// CAN 1
+	// for peripheral functions, the GPER must be 0
+	AVR32_GPIO.port[2].gper = 0<<15;
+	AVR32_GPIO.port[2].gper = 0<<16;
 	AVR32_GPIO.port[2].pmr0 = 1<<15; AVR32_GPIO.port[2].pmr1 = 1<<15; AVR32_GPIO.port[2].pmr2 = 0;// Port C Pin 15 CANRX MODE D
 	AVR32_GPIO.port[2].pmr0 = 1<<16; AVR32_GPIO.port[2].pmr1 = 1<<16; AVR32_GPIO.port[2].pmr2 = 0;// Port C Pin 16 CANTX MODE D
+	// CANIF channel 1
+	AVR32_CANIF.channel[1].CANCFG.ovrm  = 1; // Overrun Mode
+	AVR32_CANIF.channel[1].CANCFG.cmode = 2; // Loopback Mode
+	AVR32_CANIF.channel[1].CANCFG.sm    = 1; // Sampling Method
+	AVR32_CANIF.channel[1].CANCFG.sjw   = 1; // Sync Jump width
+	AVR32_CANIF.channel[1].CANCFG.prs   = 1; // Propagation segment
+	
+	// CAN 0
+	// for peripheral functions, the GPER must be 0
+	AVR32_GPIO.port[2].gper = 0<<21;
+	AVR32_GPIO.port[2].gper = 0<<22;
 	AVR32_GPIO.port[2].pmr0 = 1<<21; AVR32_GPIO.port[2].pmr1 =     0; AVR32_GPIO.port[2].pmr2 = 0;// Port C Pin 21 CANRX MODE B
 	AVR32_GPIO.port[2].pmr0 = 1<<22; AVR32_GPIO.port[2].pmr1 =     0; AVR32_GPIO.port[2].pmr2 = 0;// Port C Pin 22 CANTX MODE B
 	
-	// Interne Register initialisieren
 }
 
 // DAC Schnittstelle initialisieren
