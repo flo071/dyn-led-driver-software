@@ -44,7 +44,7 @@ void spi_init(void) {
 	AVR32_GPIO.port[3].gper = 0<<01;
 	AVR32_GPIO.port[3].gper = 0<<02;
 	AVR32_GPIO.port[3].gper = 0<<03;
-	AVR32_GPIO.port[3].pmr0 = 0; AVR32_GPIO.port[3].pmr1 = 0; AVR32_GPIO.port[3].pmr2 = 0;// Port D Pin 0 CANRX MODE A
+	AVR32_GPIO.port[3].pmr0 = 0; AVR32_GPIO.port[3].pmr1 = 0; AVR32_GPIO.port[3].pmr2 = 0; // Port D Pin 0 CANRX MODE A
 }
 
 // CANIF0/1 Schnittstelle initialisieren
@@ -67,8 +67,8 @@ void can_init(void) {
 	// for peripheral functions, the GPER must be 0
 	AVR32_GPIO.port[2].gper = 0<<15;
 	AVR32_GPIO.port[2].gper = 0<<16;
-	AVR32_GPIO.port[2].pmr0 = 1<<15; AVR32_GPIO.port[2].pmr1 = 1<<15; AVR32_GPIO.port[2].pmr2 = 0;// Port C Pin 15 CANRX MODE D
-	AVR32_GPIO.port[2].pmr0 = 1<<16; AVR32_GPIO.port[2].pmr1 = 1<<16; AVR32_GPIO.port[2].pmr2 = 0;// Port C Pin 16 CANTX MODE D
+	AVR32_GPIO.port[2].pmr0 = 1<<15; AVR32_GPIO.port[2].pmr1 = 1<<15; AVR32_GPIO.port[2].pmr2 = 0; // Port C Pin 15 CANRX MODE D
+	AVR32_GPIO.port[2].pmr0 = 1<<16; AVR32_GPIO.port[2].pmr1 = 1<<16; AVR32_GPIO.port[2].pmr2 = 0; // Port C Pin 16 CANTX MODE D
 	// CANIF channel 1
 	AVR32_CANIF.channel[1].CANCFG.ovrm  = 1; // Overrun Mode
 	AVR32_CANIF.channel[1].CANCFG.cmode = 2; // Loopback Mode
@@ -85,8 +85,8 @@ void can_init(void) {
 	// for peripheral functions, the GPER must be 0
 	AVR32_GPIO.port[2].gper = 0<<21;
 	AVR32_GPIO.port[2].gper = 0<<22;
-	AVR32_GPIO.port[2].pmr0 = 1<<21; AVR32_GPIO.port[2].pmr1 =     0; AVR32_GPIO.port[2].pmr2 = 0;// Port C Pin 21 CANRX MODE B
-	AVR32_GPIO.port[2].pmr0 = 1<<22; AVR32_GPIO.port[2].pmr1 =     0; AVR32_GPIO.port[2].pmr2 = 0;// Port C Pin 22 CANTX MODE B
+	AVR32_GPIO.port[2].pmr0 = 1<<21; AVR32_GPIO.port[2].pmr1 =     0; AVR32_GPIO.port[2].pmr2 = 0; // Port C Pin 21 CANRX MODE B
+	AVR32_GPIO.port[2].pmr0 = 1<<22; AVR32_GPIO.port[2].pmr1 =     0; AVR32_GPIO.port[2].pmr2 = 0; // Port C Pin 22 CANTX MODE B
 	// CANIF channel 0
 	AVR32_CANIF.channel[0].CANCFG.ovrm  = 1; // Overrun Mode
 	AVR32_CANIF.channel[0].CANCFG.cmode = 2; // Loopback Mode
