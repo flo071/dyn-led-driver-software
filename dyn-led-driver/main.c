@@ -75,6 +75,11 @@ void can_init(void) {
 	AVR32_CANIF.channel[1].CANCFG.sm    = 1; // Sampling Method
 	AVR32_CANIF.channel[1].CANCFG.sjw   = 1; // Sync Jump width
 	AVR32_CANIF.channel[1].CANCFG.prs   = 1; // Propagation segment
+	// Init CAN channel 1
+	AVR32_CANIF.channel[1].CANCTRL.wken = 1; // CAN Interrupt wake enabled
+	AVR32_CANIF.channel[1].CANCTRL.ovrq = 0; // Overloads will not be handled
+	AVR32_CANIF.channel[1].CANCTRL.cen  = 1; // Enable channel for requests
+	AVR32_CANIF.channel[1].CANCTRL.init = 1; // Init CAN channel 1
 	
 	// CAN 0
 	// for peripheral functions, the GPER must be 0
@@ -88,6 +93,13 @@ void can_init(void) {
 	AVR32_CANIF.channel[0].CANCFG.sm    = 1; // Sampling Method
 	AVR32_CANIF.channel[0].CANCFG.sjw   = 1; // Sync Jump width
 	AVR32_CANIF.channel[0].CANCFG.prs   = 1; // Propagation segment
+	// Init CAN channel 0
+	AVR32_CANIF.channel[0].CANCTRL.wken = 1; // CAN Interrupt wake enabled
+	AVR32_CANIF.channel[0].CANCTRL.ovrq = 0; // Overloads will not be handled
+	AVR32_CANIF.channel[0].CANCTRL.cen  = 1; // Enable channel for requests
+	AVR32_CANIF.channel[0].CANCTRL.init = 1; // Init CAN channel 0
+	
+	
 	
 }
 
