@@ -13,8 +13,10 @@ void can_init(void);
 void dac_init(void);
 void adc_init(void);
 
-void can_receive(void);
-void can_send(void);
+void can_receive_ch0(void);
+void can_send_ch0(void);
+void can_receive_ch1(void);
+void can_send_ch1(void);
 void spi_send(void);
 void dac_set_current(void);
 void adc_measure_current(void);
@@ -103,6 +105,57 @@ void can_init(void) {
 	
 }
 
+void can_receive_ch0(void) {
+	/*
+	 *  Reference for Checks:
+	 *		Datasheet Page 781 CAN Status Register
+	 */
+	if (AVR32_CANIF.channel[0].CANSR.ces == 1) { // check if channel is enabled
+		// For debugging: a unused GPIO PIN can be set to 1 when this case is true
+		while(AVR32_CANIF.channel[0].CANSR.rs == 1){ // while receiving
+			// TODO: Add code to handle received message
+		}
+	}
+}
+
+void can_send_ch0(void) {
+	/*
+	 *  Reference for Checks:
+	 *		Datasheet Page 781 CAN Status Register
+	 */
+	if (AVR32_CANIF.channel[0].CANSR.ces == 1) { // check if channel is enabled
+		// For debugging: a unused GPIO PIN can be set to 1 when this case is true
+		while(AVR32_CANIF.channel[0].CANSR.ts == 1){ // while sending
+			// TODO: Add code to handle received transmit message
+		}
+	}
+}
+
+void can_receive_ch1(void) {
+	/*
+	 *  Reference for Checks:
+	 *		Datasheet Page 781 CAN Status Register
+	 */
+	if (AVR32_CANIF.channel[1].CANSR.ces == 1) { // check if channel is enabled
+		// For debugging: a unused GPIO PIN can be set to 1 when this case is true
+		while(AVR32_CANIF.channel[1].CANSR.rs == 1){ // while receiving
+			// TODO: Add code to handle received message
+		}
+	}
+}
+
+void can_send_ch1(void) {
+	/*
+	 *  Reference for Checks:
+	 *		Datasheet Page 781 CAN Status Register
+	 */
+	if (AVR32_CANIF.channel[1].CANSR.ces == 1) { // check if channel is enabled
+		// For debugging: a unused GPIO PIN can be set to 1 when this case is true
+		while(AVR32_CANIF.channel[1].CANSR.ts == 1){ // while sending
+			// TODO: Add code to handle received transmit message
+		}
+	}
+}
 // DAC Schnittstelle initialisieren
 void dac_init(void) {
 	// GPIO Ports initialisieren
