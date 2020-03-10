@@ -57,6 +57,12 @@ void can_init(void) {
 	 *  46 PC22 CANIFTX0  UCD   B
 	 */
 	
+	/*
+	 * One CAN Port will need to get an external interrupt enabled later
+	 * to ensure that the UCD Commands will get received at every 
+	 * sent message.
+	 */
+	
 	// CAN 1
 	// for peripheral functions, the GPER must be 0
 	AVR32_GPIO.port[2].gper = 0<<15;
