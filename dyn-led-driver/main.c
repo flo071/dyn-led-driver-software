@@ -1,5 +1,6 @@
 /*
  * Controller : AT32UC3C2512C
+ * Datasheet  : http://ww1.microchip.com/downloads/en/DeviceDoc/doc32117.pdf
  * Author     : flo071
  *
  */ 
@@ -130,7 +131,7 @@ void can_receive_ch0(void) {
 	if (AVR32_CANIF.channel[0].CANSR.ces == 1) { // check if channel is enabled
 		// For debugging: a unused GPIO PIN can be set to 1 when this case is true
 		while(AVR32_CANIF.channel[0].CANSR.rs == 1){ // while receiving
-			// TODO: Add code to handle received message
+			// TODO: Add code to handle LMM ACK message
 		}
 	}
 }
@@ -154,13 +155,16 @@ void can_send_ch0(void) {
 	 *		
 	 *		7 - byte communication length
 	 *
+	 *		LMM sends ACK if it accepts the message
+	 *			will be hanled here: can_receive_ch0()
+	 *
 	 *  Reference for Checks:
 	 *		Datasheet Page 781 CAN Status Register
 	 */
 	if (AVR32_CANIF.channel[0].CANSR.ces == 1) { // check if channel is enabled
 		// For debugging: a unused GPIO PIN can be set to 1 when this case is true
 		while(AVR32_CANIF.channel[0].CANSR.ts == 1){ // while sending
-			// TODO: Add code to handle received transmit message
+			// TODO: Add code to transmit message
 		}
 	}
 }
@@ -190,6 +194,7 @@ void can_send_ch1(void) {
 		}
 	}
 }
+
 // DAC Schnittstelle initialisieren
 void dac_init(void) {
 	// GPIO Ports initialisieren
