@@ -6,6 +6,23 @@
 
 #include <avr32/io.h>
 
+#define LMM_INIT_BYTE     0x99
+#define LMM_DEVID_BYTE    0x61
+#define LMM_LED_CHANNEL01 0x42
+#define LMM_LED_CHANNEL02 0x46
+#define LMM_LED_CHANNEL03 0x4a
+#define LMM_LED_CHANNEL04 0x4e
+#define LMM_LED_CHANNEL05 0x52
+#define LMM_LED_CHANNEL06 0x56
+#define LMM_LED_CHANNEL07 0x5a
+#define LMM_LED_CHANNEL08 0x5e
+#define LMM_LED_CHANNEL09 0x62
+#define LMM_LED_CHANNEL10 0x66
+#define LMM_LED_CHANNEL11 0x6a
+#define LMM_LED_CHANNEL12 0x6e
+#define LMM_CRCL_BYTE	  0x07
+#define LMM_CRCH_BYTE     0x42
+
 // Funktionsprototypen - Start
 void init(void);
 void spi_init(void); 
@@ -120,6 +137,23 @@ void can_receive_ch0(void) {
 
 void can_send_ch0(void) {
 	/*
+	 *  Communication with TI LMM
+	 *		Frame initialisation bit
+	 *			0x99	
+	 *		Device ID
+	 *			0x61
+	 *      LED Channel to set
+	 *			0x4a
+	 *		Data
+	 *			0x00 
+	 *			0x00
+	 *		CRCL
+	 *			0x07
+	 *		CRCH
+	 *			0x42
+	 *		
+	 *		7 - byte communication length
+	 *
 	 *  Reference for Checks:
 	 *		Datasheet Page 781 CAN Status Register
 	 */
