@@ -32,7 +32,8 @@ void dac_init(void);
 void adc_init(void);
 
 void can_receive_ch0(void);
-void can_send_ch0(void);
+void can_send_ch0(int led, char data[]);
+void build_lmm_message(void);
 void can_receive_ch1(void);
 void can_send_ch1(void);
 void spi_send(void);
@@ -118,9 +119,6 @@ void can_init(void) {
 	AVR32_CANIF.channel[0].CANCTRL.ovrq = 0; // Overloads will not be handled
 	AVR32_CANIF.channel[0].CANCTRL.cen  = 1; // Enable channel for requests
 	AVR32_CANIF.channel[0].CANCTRL.init = 1; // Init CAN channel 0
-	
-	
-	
 }
 
 void can_receive_ch0(void) {
@@ -136,9 +134,9 @@ void can_receive_ch0(void) {
 	}
 }
 
-void can_send_ch0(void) {
+void can_send_ch0(int led, char data[]) {
 	/*
-	 *  Communication with TI LMM
+	 *  Communication with TI LMM:
 	 *		Frame initialisation bit
 	 *			0x99	
 	 *		Device ID
@@ -146,7 +144,7 @@ void can_send_ch0(void) {
 	 *      LED Channel to set
 	 *			0x4a
 	 *		Data
-	 *			0x00 
+	 *			0x00
 	 *			0x00
 	 *		CRCL
 	 *			0x07
@@ -165,8 +163,13 @@ void can_send_ch0(void) {
 		// For debugging: a unused GPIO PIN can be set to 1 when this case is true
 		while(AVR32_CANIF.channel[0].CANSR.ts == 1){ // while sending
 			// TODO: Add code to transmit message
+			
 		}
 	}
+}
+
+void build_lmm_message(void) {
+	
 }
 
 void can_receive_ch1(void) {
